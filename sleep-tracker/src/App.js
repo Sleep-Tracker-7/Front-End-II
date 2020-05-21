@@ -1,41 +1,14 @@
 import React from 'react';
-import './App.css';
-import Stats from './components/stats.js';
-import Login from './components/Login';
-import Clock from './components/Clock'
-import axios from 'axios'
-import { Route } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-
-class App extends React.Component {
-  state = {
-      isLoggedIn: true,
-      user: {
-          username: ' ',
-          email:' ',
-          password: ' ', 
-          user_id: 1,
-        },
-       sleeptimes:{
-          bedtime: 0,
-          waketime: 1,
-          sleepquality: 2,
-          date: 3,
-        }  
-    isLoggedIn: true,
-    user: {
-      email: " ",
-      username: " ",
-      password: " "
-      
-    },
-    sleeptimes: {
-      bedtime: 0,
-      waketime: 1,
-      sleepquality: 2,
-      date: 3
-    }
-  };
-
-
-export default App;
+export default function App() {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = data => console.log(data);
+  console.log(errors);
+  
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+   
+    </form>
+  );
+}
