@@ -12,3 +12,12 @@ export default function App() {
     </form>
   );
 }
+
+// npm install react-hook-form
+// npm install react-router-dom
+// npm install axios
+// npm install redux
+// npm install react-redux
+// npm install --save redux-thunk
+// npm install --save react-middleware
+// npm install --save-dev redux-devtools
