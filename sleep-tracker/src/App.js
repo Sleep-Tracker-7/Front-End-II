@@ -1,22 +1,37 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
-import { AddSleepData } from './components/AddSleepData'
 import Login from './components/Login'
+import { PrivateRoute } from './utils/PrivateRoute'
+
+import { SleepTracker } from './components/SleepTracker'
+import { AddSleepData } from './components/AddSleepData'
 
 export default function App() {
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
-  console.log(errors);
+  // const { register, handleSubmit, errors } = useForm();
+  // const onSubmit = data => console.log(data);
+  // console.log(errors);
 
   return (
-    <div>
-      <Login />
-      <AddSleepData />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        test
-    </form>
-    </div>
+    <Router>
+      <div className='app'>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/home'>Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <PrivateRoute exact path='/sleep-tracker' component={SleepTracker} />
+          <Route path='/login' component={Login} />
+          <Route component={Login} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
