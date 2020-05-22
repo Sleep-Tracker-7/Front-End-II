@@ -20,6 +20,7 @@ export default function App() {
             <li>
               <Link to='/home'>Home</Link>
             </li>
+            {/* Add signup link and form? */}
             <li>
               <Link to="/login">Login</Link>
             </li>
@@ -34,7 +35,6 @@ export default function App() {
     </Router>
   );
 }
-
 
 // npm install react-hook-form
 // npm install react-router-dom
