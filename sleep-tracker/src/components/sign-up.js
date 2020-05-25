@@ -54,14 +54,14 @@ class Register extends Component {
 					<div className="email">
 						<input
 							type="text"
-							placeholder="Enter your email"
+							placeholder="Enter your email address"
 							name="email"
 							value={this.state.email}
 							onChange={this.update}
 						/>
 					</div>
 
-					<div className="pasword">
+					<div className="password">
 						<input
 							type="password"
 							placeholder="Password"
