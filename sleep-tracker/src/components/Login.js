@@ -1,17 +1,70 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function App() {
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
-  console.log(errors);
-  
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" placeholder="User Name" name="User Name" ref={register({required: true, maxLength: 80})} />
-      <input type="text" placeholder="Password" name="Password" ref={register({required: true, maxLength: 100})} />
+class Login extends Component {
+	constructor(props) {
+		super(props);
 
-      <input type="submit" />
-    </form>
-  );
+		this.state = {
+			email: '',
+			password: ''
+		};
+
+		this.update = this.update.bind(this);
+
+		this.displayLogin = this.displayLogin.bind(this);
+	}
+
+	update(e) {
+		let name = e.target.name;
+		let value = e.target.value;
+		this.setState({
+			[name]: value
+		});
+	}
+
+	displayLogin(e) {
+		e.preventDefault();
+		console.log('Welcome Back');
+		console.log(this.state);
+		this.setState({
+			email: '',
+			password: ''
+		});
+	}
+
+	render() {
+		return (
+			<div className="login">
+				<form onSubmit={this.displayLogin}>
+					<h2>Login</h2>
+					<div className="username">
+						<input
+							type="text"
+							placeholder="Username..."
+							value={this.state.email}
+							onChange={this.update}
+							name="email"
+						/>
+					</div>
+
+					<div className="password">
+						<input
+							type="password"
+							placeholder="Password..."
+							value={this.state.password}
+							onChange={this.update}
+							name="password"
+						/>
+					</div>
+
+					<input type="submit" value="Login" />
+				</form>
+
+				<Link to="/register">Create an account</Link>
+			</div>
+		);
+	}
 }
+
+export default Login;
