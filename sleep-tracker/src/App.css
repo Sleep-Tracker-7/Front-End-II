@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-bar {
+  /* border: 1px solid red; */
+  width: 75%;
+  margin: 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.login-page {
+  margin: 10px auto;
+  /* border: 1px solid red; */
+  width: 50%;
+  height: 75vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  margin: 125px auto;
+  padding: 15px;
+}
+
+input {
+  margin: 5px;
+}

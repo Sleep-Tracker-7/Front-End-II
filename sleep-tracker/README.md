@@ -1,3 +1,15 @@
+Installed dependencies
+        npm install react-hook-form
+        npm install react-router-dom
+        npm install axios
+        npm install redux
+        npm install react-redux
+        npm install --save redux-thunk
+        npm install --save react-middleware
+        npm install --save-dev redux-devtools
+        npm install yup
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
