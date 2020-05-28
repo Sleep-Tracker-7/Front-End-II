@@ -1,7 +1,9 @@
 import React from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { getSleepData } from '../action/indexAction'
+import { connect } from 'react-redux'
 
-export const SleepTracker = () => {
+const SleepTracker = () => {
 
     axiosWithAuth()
         .get('/sleep/')
@@ -15,3 +17,12 @@ export const SleepTracker = () => {
         <div>SleepTracker.js</div>
     )
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return ({
+        state: state,
+        cookies: ownProps.cookies,
+    });
+};
+
+export default connect(mapStateToProps, { getSleepData })(SleepTracker)

@@ -4,7 +4,7 @@ import {
     FETCHING_SLEEP_DATA_FAILURE
 } from '../action/indexAction'
 
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+// import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const initialState = {
     name: ''

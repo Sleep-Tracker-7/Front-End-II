@@ -48,18 +48,18 @@
   justify-content: space-evenly;
 }
 
-.login-page {
+.login-page, .signup-page {
+  border: 1px solid red;
   margin: 10px auto;
-  /* border: 1px solid red; */
   width: 50%;
   height: 75vh;
 }
 
-.login-form {
+.login-form, .signup-form {
   display: flex;
   flex-direction: column;
   width: 15%;
-  margin: 125px auto;
+  margin: auto;
   padding: 15px;
 }
 

@@ -7,6 +7,7 @@ export const axiosWithAuth = () => {
         baseURL: "https://sleep-tracker-7-backend.herokuapp.com/",
         headers: {
             Authorization: token
-        }
+        },
+        withCredentials: true
     });
 }
