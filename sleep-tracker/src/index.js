@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+
 import './index.css';
 import App from './App';
-
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 import { indexReducer } from './reducer/indexReducer';
-import { CookiesProvider } from 'react-cookie'
 
-const store = createStore(indexReducer)
+const store = createStore(indexReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <CookiesProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </CookiesProvider>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );

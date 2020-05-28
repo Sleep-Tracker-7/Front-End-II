@@ -48,14 +48,15 @@
   justify-content: space-evenly;
 }
 
-.login-page, .signup-page {
+.login-page, .signup-page, .sleeptracker-page {
   border: 1px solid red;
   margin: 10px auto;
   width: 50%;
   height: 75vh;
+  padding: 0px 10px;
 }
 
-.login-form, .signup-form {
+.login-form, .signup-form, .sleep-data {
   display: flex;
   flex-direction: column;
   width: 15%;

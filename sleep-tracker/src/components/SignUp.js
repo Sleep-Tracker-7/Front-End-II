@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
-// Renamed this file for consistency across the App
-
 class SignUp extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			fullname: '',
 			username: '',
 			password: ''
 		};
@@ -25,15 +22,16 @@ class SignUp extends Component {
 	displayLogin(e) {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/auth/register')
-			.then(res => console.log('Signup res: ', res))
+			.post('/auth/register', this.state)
+			.then(res => {
+				console.log('Signup res: ', res)
+			})
 			.catch(error => console.log('Error is: ', error))
 
-		// this.setState({
-		// 	fullname: '',
-		// 	username: '',
-		// 	password: ''
-		// });
+		this.setState({
+			username: '',
+			password: ''
+		});
 	}
 
 	render() {
@@ -43,16 +41,9 @@ class SignUp extends Component {
 					<h2>Register</h2>
 					<input
 						type="text"
-						placeholder="Full Name"
-						name="fullname"
-						value={this.state.fullname}
-						onChange={this.update}
-					/>
-					<input
-						type="text"
 						placeholder="Username"
 						name="username"
-						value={this.state.userName}
+						value={this.state.username}
 						onChange={this.update}
 					/>
 					<input
@@ -62,17 +53,8 @@ class SignUp extends Component {
 						value={this.state.password}
 						onChange={this.update}
 					/>
-					{/* <input
-						type="password"
-						placeholder="Confirm Password"
-						name="password1"
-						value={this.state}
-						onChange={}
-					/> */}
 					<button>Sign Up</button>
 				</form>
-
-				{/* <Link to="/">Login Here</Link> */}
 			</div>
 		);
 	}

@@ -1,28 +1,23 @@
 import React from 'react'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
-import { getSleepData } from '../action/indexAction'
 import { connect } from 'react-redux'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const SleepTracker = () => {
-
     axiosWithAuth()
-        .get('/sleep/')
-        .then(results => {
-            localStorage.setItem('token', results)
-            console.log('SleepTracker.js', results)
-        })
+        .get(`/sleep/`)
+        .then(res => console.log(res))
+        // .then(results => {
+        //     localStorage.setItem('token', results)
+        //     console.log('SleepTracker.js', results)
+        // })
         .catch(error => console.log('Error is: ', error))
 
+
     return (
-        <div>SleepTracker.js</div>
+        <div className='sleeptracker-page'>
+            <h1>Header</h1>
+        </div>
     )
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return ({
-        state: state,
-        cookies: ownProps.cookies,
-    });
-};
-
-export default connect(mapStateToProps, { getSleepData })(SleepTracker)
+export default SleepTracker

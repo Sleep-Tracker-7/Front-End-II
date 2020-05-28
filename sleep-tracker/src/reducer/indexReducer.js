@@ -7,11 +7,12 @@ import {
 // import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const initialState = {
-    name: ''
-    //Need data shape to complete
+    sleepData: null,
+    isFetching: false,
+    error: ''
 }
 
-export const indexReducer = (state, action) => {
+export const indexReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCHING_SLEEP_DATA_START:
             console.log('Fetching')
