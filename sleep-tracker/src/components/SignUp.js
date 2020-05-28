@@ -8,7 +8,6 @@ class SignUp extends Component {
 		super(props);
 
 		this.state = {
-			fullname: '',
 			username: '',
 			password: ''
 		};
@@ -25,15 +24,9 @@ class SignUp extends Component {
 	displayLogin(e) {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/auth/register')
+			.post('/auth/register',this.state)
 			.then(res => console.log('Signup res: ', res))
 			.catch(error => console.log('Error is: ', error))
-
-		// this.setState({
-		// 	fullname: '',
-		// 	username: '',
-		// 	password: ''
-		// });
 	}
 
 	render() {
@@ -41,13 +34,6 @@ class SignUp extends Component {
 			<div className="signup-page">
 				<form className='signup-form' onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-					<input
-						type="text"
-						placeholder="Full Name"
-						name="fullname"
-						value={this.state.fullname}
-						onChange={this.update}
-					/>
 					<input
 						type="text"
 						placeholder="Username"
