@@ -1,23 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { getSleepData } from '../action/indexAction'
 import { connect } from 'react-redux'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const SleepTracker = () => {
-    axiosWithAuth()
-        .get(`/sleep/`)
-        .then(res => console.log(res))
-        // .then(results => {
-        //     localStorage.setItem('token', results)
-        //     console.log('SleepTracker.js', results)
-        // })
+    const [mySleep, setMySleep] = useState([])
+    
+    useEffect(()=>{
+        axiosWithAuth()
+        .get('/sleep/')
+        .then(results => {
+            localStorage.setItem('token', results)
+            console.log('SleepTracker.js', results)
+            setMySleep(results.data)
+        })
         .catch(error => console.log('Error is: ', error))
+    }, [])
 
 
     return (
-        <div className='sleeptracker-page'>
-            <h1>Header</h1>
-        </div>
+        <>
+            {mySleep.map(sleep=>{
+                return <div>
+                <p>Total hours of sleep {sleep.hours}</p>
+                {/* <p></p> */}
+                </div>
+            })}
+        </>
     )
 }
 
-export default SleepTracker
+const mapStateToProps = (
+    
+    state, ownProps) => {
+return ({
+        state: state,
+        cookies: ownProps.cookies,
+    });
+};
+
+export default connect(mapStateToProps, { getSleepData })(SleepTracker)

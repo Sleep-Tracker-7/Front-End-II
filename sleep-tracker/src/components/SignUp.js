@@ -22,16 +22,9 @@ class SignUp extends Component {
 	displayLogin(e) {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/auth/register', this.state)
-			.then(res => {
-				console.log('Signup res: ', res)
-			})
+			.post('/auth/register',this.state)
+			.then(res => console.log('Signup res: ', res))
 			.catch(error => console.log('Error is: ', error))
-
-		this.setState({
-			username: '',
-			password: ''
-		});
 	}
 
 	render() {
