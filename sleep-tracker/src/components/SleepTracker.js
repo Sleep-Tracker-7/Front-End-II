@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+
 import { getSleepData } from '../action/indexAction'
 import { connect } from 'react-redux'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const SleepTracker = () => {
     const [mySleep, setMySleep] = useState([])
@@ -16,6 +17,7 @@ const SleepTracker = () => {
         })
         .catch(error => console.log('Error is: ', error))
     }, [])
+
 
     return (
         <>

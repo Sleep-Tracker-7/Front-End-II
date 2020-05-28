@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
-// Renamed this file for consistency across the App
-
 class SignUp extends Component {
 	constructor(props) {
 		super(props);
@@ -38,7 +36,7 @@ class SignUp extends Component {
 						type="text"
 						placeholder="Username"
 						name="username"
-						value={this.state.userName}
+						value={this.state.username}
 						onChange={this.update}
 					/>
 					<input
@@ -48,17 +46,8 @@ class SignUp extends Component {
 						value={this.state.password}
 						onChange={this.update}
 					/>
-					{/* <input
-						type="password"
-						placeholder="Confirm Password"
-						name="password1"
-						value={this.state}
-						onChange={}
-					/> */}
 					<button>Sign Up</button>
 				</form>
-
-				{/* <Link to="/">Login Here</Link> */}
 			</div>
 		);
 	}
