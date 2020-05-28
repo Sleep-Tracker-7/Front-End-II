@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {axiosWithAUth} from '../utils/axiosWithAuth'
+// import {axiosWithAUth} from '../utils/axiosWithAuth'
 
 export const FETCHING_SLEEP_DATA_START = 'FETCHING_SLEEP_DATA_START';
 export const FETCHING_SLEEP_DATA_SUCCESS = 'FETCHING_SLEEP_DATA_SUCCESS';

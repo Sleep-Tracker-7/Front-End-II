@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 // Renamed this file for consistency across the App
 
@@ -9,7 +9,7 @@ class SignUp extends Component {
 
 		this.state = {
 			fullname: '',
-			email: '',
+			username: '',
 			password: ''
 		};
 
@@ -18,69 +18,61 @@ class SignUp extends Component {
 		this.displayLogin = this.displayLogin.bind(this);
 	}
 
-	update(e) {
-		let name = e.target.name;
-		let value = e.target.value;
-		this.setState({
-			[name]: value
-		});
+	update = e => {
+		this.setState({ [e.target.name]: e.target.value });
 	}
 
 	displayLogin(e) {
 		e.preventDefault();
-		console.log('Registration Successful!');
-		console.log(this.state);
-		this.setState({
-			fullname: '',
-			email: '',
-			password: ''
-		});
+		axiosWithAuth()
+			.post('/auth/register')
+			.then(res => console.log('Signup res: ', res))
+			.catch(error => console.log('Error is: ', error))
+
+		// this.setState({
+		// 	fullname: '',
+		// 	username: '',
+		// 	password: ''
+		// });
 	}
 
 	render() {
 		return (
-			<div className="register">
-				<form onSubmit={this.displayLogin}>
+			<div className="signup-page">
+				<form className='signup-form' onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-
-					<div className="name">
-						<input
-							type="text"
-							placeholder="Full Name"
-							name="fullname"
-							value={this.state.fullname}
-							onChange={this.update}
-						/>
-					</div>
-
-					<div className="email">
-						<input
-							type="text"
-							placeholder="Enter your email address"
-							name="email"
-							value={this.state.email}
-							onChange={this.update}
-						/>
-					</div>
-
-					<div className="password">
-						<input
-							type="password"
-							placeholder="Password"
-							name="password"
-							value={this.state.password}
-							onChange={this.update}
-						/>
-					</div>
-
-					<div className="password">
-						<input type="password" placeholder="Confirm Password" name="password1" />
-					</div>
-
-					<input type="submit" value="Login" />
+					<input
+						type="text"
+						placeholder="Full Name"
+						name="fullname"
+						value={this.state.fullname}
+						onChange={this.update}
+					/>
+					<input
+						type="text"
+						placeholder="Username"
+						name="username"
+						value={this.state.userName}
+						onChange={this.update}
+					/>
+					<input
+						type="password"
+						placeholder="Password"
+						name="password"
+						value={this.state.password}
+						onChange={this.update}
+					/>
+					{/* <input
+						type="password"
+						placeholder="Confirm Password"
+						name="password1"
+						value={this.state}
+						onChange={}
+					/> */}
+					<button>Sign Up</button>
 				</form>
 
-				<Link to="/">Login Here</Link>
+				{/* <Link to="/">Login Here</Link> */}
 			</div>
 		);
 	}

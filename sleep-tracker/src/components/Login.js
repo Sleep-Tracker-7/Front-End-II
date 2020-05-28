@@ -38,6 +38,7 @@ class Login extends React.Component {
         return (
             <div className='login-page'>
                 <form className='login-form' onSubmit={this.login}>
+                    <h2>Log In</h2>
                     <input
                         type="text"
                         name="username"
