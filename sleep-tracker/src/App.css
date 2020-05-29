@@ -64,6 +64,17 @@
   padding: 15px;
 }
 
-input {
+input, select {
   margin: 5px;
+}
+
+.add-sleep-page {
+  border: 1px solid red;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-sleep-form {
+  display: flex;
+  flex-direction: column;
 }
