@@ -115,7 +115,7 @@ export function Album() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <div style={{display:'flex',flexDirection:'column', justifyContent:'center', alignContent:'center', alignItems:'center'}}>
-              <SleepHist/>
+             {mySleep.length>0 ?  <SleepHist/>:null}
               <Grid container spacing={4}>
                 {mySleep.map((sleep, index) => (
                   <Grid item key={index} xs={12} sm={6} md={4}>
