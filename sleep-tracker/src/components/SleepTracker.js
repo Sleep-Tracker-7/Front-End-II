@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-
-import { getSleepData } from '../action/indexAction'
-import { connect } from 'react-redux'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import SleepHist from './SleepHist'
 
-// import React from 'react';
+
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-// import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -166,13 +162,4 @@ export function Album() {
   );
 }
 
-const mapStateToProps = (
-
-    state, ownProps) => {
-    return ({
-        state: state,
-        cookies: ownProps.cookies,
-    });
-};
-
-export default connect(mapStateToProps, { getSleepData })(Album)
+export default Album
