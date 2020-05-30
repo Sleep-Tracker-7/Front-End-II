@@ -23,7 +23,10 @@ class SignUp extends Component {
 		e.preventDefault();
 		axiosWithAuth()
 			.post('/auth/register',this.state)
-			.then(res => console.log('Signup res: ', res))
+			.then(res => {
+				console.log('Signup res: ', res)
+				this.props.history.push('/login')
+			})
 			.catch(error => console.log('Error is: ', error))
 	}
 

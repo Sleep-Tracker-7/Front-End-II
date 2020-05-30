@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.10.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,6 +11,7 @@
     "cookie-parser": "^1.4.5",
     "moment": "^2.26.0",
     "react": "^16.13.1",
+    "react-chart-histogram": "^0.2.4",
     "react-cookie": "^4.0.3",
     "react-datepicker": "^2.16.0",
     "react-dom": "^16.13.1",

@@ -11,6 +11,11 @@ import { PrivateRoute } from './utils/PrivateRoute'
 import SleepTracker from './components/SleepTracker'
 // import { getSleepData } from './action/indexAction'
 // import { AddSleepData } from './components/AddSleepData'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+
 
 import './App.css'
 
@@ -19,20 +24,20 @@ class App extends React.Component {
   render() {
     return (
       <div className='app'>
+
+
         <Router>
-          <nav className='nav-bar'>
-            <ul className='nav-list'>
-              <li className='home'>
-                <Link to='/home'>Home</Link>
-              </li>
-              <li className='login'>
-                <Link to="/login">Login</Link>
-              </li>
-              <li className='sign-up'>
-                <Link to='/sign-up'>Sign up</Link>
-              </li>
-            </ul>
-          </nav>
+          <AppBar position="relative">
+            <Toolbar>
+                <div style={{display:'flex', margin:'0 auto', justifyContent:'flex-end', width: '100%'}}>
+                 <div style={{display:'flex', justifyContent:'space-evenly', width:'40%'}}>
+                    <Link style={{color:'white', width:'25%', fontWeight:'bold', textDecoration:'none'}} to='/home'>Home</Link>
+                    <Link style={{color:'white', width:'25%', fontWeight:'bold', textDecoration:'none'}} to="/login">Login</Link>
+                    <Link style={{color:'white', width:'25%', fontWeight:'bold', textDecoration:'none'}} to='/sign-up'>Sign up</Link>
+                 </div>
+                </div>
+            </Toolbar>
+          </AppBar>
           <Switch>
             <PrivateRoute exact path='/sleep-tracker' component={SleepTracker} />
             {/* <PrivateRoute exact path='/sleep-tracker' render={() => (<SleepTracker cookies={this.props.cookies} />)} /> */}
