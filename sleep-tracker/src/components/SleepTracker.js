@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import SleepHist from './SleepHist'
-
+import { useHistory } from "react-router-dom";
+// import {BrowserRouter as Route} from 'react-router-dom'
+// import AddSleepData from './AddSleepData'
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -64,23 +66,29 @@ const useStyles = makeStyles((theme) => ({
 
 
 export function Album() {
+  let history = useHistory()
   const classes = useStyles();
 
   const [mySleep, setMySleep] = useState([])
 
-    useEffect(() => {
-        axiosWithAuth()
-            .get('/sleep/')
-            .then(results => {
-                localStorage.setItem('token', results)
-                console.log('SleepTracker.js', results)
-                setMySleep(results.data)
-            })
-            .catch(error => console.log('Error is: ', error))
-    }, [])
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/sleep/')
+      .then(results => {
+        localStorage.setItem('token', results)
+        console.log('SleepTracker.js', results)
+        setMySleep(results.data)
+      })
+      .catch(error => console.log('Error is: ', error))
+  }, [])
+
+  function handleClick() {
+    history.push("/add-sleep");
+  }
 
   return (
     <React.Fragment>
+    {/* <Route path='/add-sleep' component={AddSleepData} /> */}
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -95,8 +103,8 @@ export function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                   Get Some sleep
+                  <Button variant="contained" color="primary" onClick={handleClick}>
+                    Get Some sleep
                   </Button>
                 </Grid>
                 <Grid item>
@@ -110,40 +118,40 @@ export function Album() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <div style={{display:'flex',flexDirection:'column', justifyContent:'center', alignContent:'center', alignItems:'center'}}>
-             {mySleep.length>0 ?  <SleepHist/>:null}
-              <Grid container spacing={4}>
-                {mySleep.map((sleep, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4}>
-                    <Card className={classes.card}>
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image="https://source.unsplash.com/random"
-                        title="Image title"
-                      />
-                      <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+            {mySleep.length > 0 ? <SleepHist /> : null}
+            <Grid container spacing={4}>
+              {mySleep.map((sleep, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image="https://source.unsplash.com/random"
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
                         {sleep.start ? sleep.start.split(' ')[0] : null}
-                        </Typography>
-                        <Typography>
-                        {sleep.hours? `Total hours of sleep ${sleep.hours}`:null}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small" color="primary">
-                          View
+                      </Typography>
+                      <Typography>
+                        {sleep.hours ? `Total hours of sleep ${sleep.hours}` : null}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" color="primary">
+                        View
                         </Button>
-                        <Button size="small" color="primary">
-                          Edit
+                      <Button size="small" color="primary">
+                        Edit
                         </Button>
-                        {sleep.end? null: <Button size="small" color="primary">
-                          Wake Up
+                      {sleep.end ? null : <Button size="small" color="primary">
+                        Wake Up
                         </Button>}
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </div>
         </Container>
       </main>

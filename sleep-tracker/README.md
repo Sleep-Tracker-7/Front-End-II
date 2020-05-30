@@ -8,6 +8,9 @@ Installed dependencies
         npm install --save react-middleware
         npm install --save-dev redux-devtools
         npm install yup
+        npm install @material-ui/core
+        npm install react-time-picker
+        npm install react-datepicker
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
