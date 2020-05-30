@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import SleepHist from './SleepHist'
 import { useHistory } from "react-router-dom";
-// import {BrowserRouter as Route} from 'react-router-dom'
-// import AddSleepData from './AddSleepData'
 
-import AppBar from '@material-ui/core/AppBar';
+// import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
+// import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -86,9 +84,14 @@ export function Album() {
     history.push("/add-sleep");
   }
 
+  function viewData(sleep, index) {
+    // console.log(sleep)
+    history.push(`/sleep-tracker/${index}`)
+  }
+
   return (
     <React.Fragment>
-    {/* <Route path='/add-sleep' component={AddSleepData} /> */}
+      {/* <Route path='/add-sleep' component={AddSleepData} /> */}
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -138,7 +141,7 @@ export function Album() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" color="primary">
+                      <Button size="small" color="primary" onClick={() => viewData(sleep, index)}>
                         View
                         </Button>
                       <Button size="small" color="primary">

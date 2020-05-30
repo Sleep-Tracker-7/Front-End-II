@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import { withCookies } from 'react-cookie'
+import SleepCard from './components/SleepCard'
 
 import Login from './components/Login';
 import SignUp from './components/SignUp'
@@ -8,7 +9,7 @@ import { PrivateRoute } from './utils/PrivateRoute'
 import SleepTracker from './components/SleepTracker'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 
 import AddSleepData from './components/AddSleepData'
 
@@ -35,10 +36,14 @@ class App extends React.Component {
           </AppBar>
           <Switch>
             <PrivateRoute exact path='/sleep-tracker' component={SleepTracker} />
-            {/* <PrivateRoute exact path='/sleep-tracker' render={() => (<SleepTracker cookies={this.props.cookies} />)} /> */}
             <Route path='/sign-up' component={SignUp} />
             <Route path='/login' component={Login} />
             <Route path='/add-sleep' component={AddSleepData} />
+            {/* <PrivateRoute exact path='/sleep-tracker/:id' component={SleepCard}/> */}
+            <Route
+              path='/sleep-tracker/:index'
+              render={(props) => <SleepCard {...props} />}
+            />
           </Switch>
         </Router>
       </div>
