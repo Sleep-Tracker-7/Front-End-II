@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import { withCookies } from 'react-cookie'
 import SleepCard from './components/SleepCard'
 
 import Login from './components/Login';
@@ -20,8 +19,6 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-
-
         <Router>
           <AppBar position="relative">
             <Toolbar className='toolbar'>
@@ -38,10 +35,10 @@ class App extends React.Component {
             <PrivateRoute exact path='/sleep-tracker' component={SleepTracker} />
             <Route path='/sign-up' component={SignUp} />
             <Route path='/login' component={Login} />
-            <Route path='/add-sleep' component={AddSleepData} />
+            <Route path='/sleep-tracker/add-sleep' component={AddSleepData} />
             {/* <PrivateRoute exact path='/sleep-tracker/:id' component={SleepCard}/> */}
-            <Route
-              path='/sleep-tracker/:index'
+            <PrivateRoute
+              path='/sleep-tracker/:id'
               render={(props) => <SleepCard {...props} />}
             />
           </Switch>
@@ -51,4 +48,4 @@ class App extends React.Component {
   };
 }
 
-export default withCookies(App)
+export default App

@@ -1,11 +1,12 @@
+import React from 'react'
 import Histogram from 'react-chart-histogram';
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography';
 
 const SleepHist = ({ sleepData }) => {
-    const [sleepHash, setSleepHash] = useState({})
-    const [sleepScore, setSleepScore] = useState([]) 
-    const [hours, setHours] = useState()
+    // const [sleepHash, setSleepHash] = useState({})
+    // const [sleepScore, setSleepScore] = useState([]) 
+    // const [hours, setHours] = useState()
 
     // useEffect(()=>{
     //     sleepData.forEach(sleep=>{

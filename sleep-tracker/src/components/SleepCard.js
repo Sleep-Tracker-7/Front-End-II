@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+import React, { useState } from 'react'
+// import { axiosWithAuth } from '../utils/axiosWithAuth'
+// import { Link } from 'react-router-dom'
 
 // import Button from '@material-ui/core/Button';
 // import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+// import CardContent from '@material-ui/core/CardContent';
+// import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 // import CssBaseline from '@material-ui/core/CssBaseline';
 // import Container from '@material-ui/core/Container';
@@ -50,18 +51,11 @@ function SleepCard(props) {
     const [data, setData] = useState({ hits: [] });
     const classes = useStyles();
 
-    useEffect(async () => {
-        const results = await axiosWithAuth()
-            .get(`/sleep/`)
-            .then(res => setData(res.data[props.match.params.index]))
-            .catch(error => console.log('Error is: ', error))
-    }, [])
-
-    // console.log(data)
+    console.log('SleepCard', props)
     return (
         <div className='sleepcard-page'>
-            <h1>Hey</h1>
-            <div>{data.start}</div>
+            <h1>Daily Sleep Data</h1>
+            {/* <div>{data.start}</div>
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
                     {data.start ? data.start.split(' ')[0] : null}
@@ -69,18 +63,8 @@ function SleepCard(props) {
                 <Typography>
                     {data.hours ? `Total hours of sleep ${data.hours}` : null}
                 </Typography>
-            </CardContent>
-            {/* <CardActions>
-                <Button size="small" color="primary">
-                    View
-                        </Button>
-                <Button size="small" color="primary">
-                    Edit
-                        </Button>
-                {data.end ? null : <Button size="small" color="primary">
-                    Wake Up
-                        </Button>}
-            </CardActions> */}
+                <Link to='/sleep-tracker'>Go Back</Link>
+            </CardContent> */}
         </div>
     )
 }

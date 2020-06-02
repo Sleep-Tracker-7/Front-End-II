@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import SleepHist from './SleepHist'
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
 // import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -15,20 +16,22 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { getSleepData, FETCHING_SLEEP_DATA_SUCCESS } from '../action/indexAction';
+
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -63,35 +66,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function Album() {
+const SleepTracker = ({ getSleepData, sleepData, isFetching, error }) => {
   let history = useHistory()
   const classes = useStyles();
 
-  const [mySleep, setMySleep] = useState([])
+  function startSleep() {
+    history.push("/sleep-tracker/add-sleep");
 
-  useEffect(() => {
+    // axiosWithAuth()
+    //   .post('sleep')
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log('Error is: ', err))
+  }
+
+  function wakeUp(props) {
+    props.end = Date()
+    console.log(props)
+
     axiosWithAuth()
-      .get('/sleep/')
-      .then(results => {
-        localStorage.setItem('token', results)
-        console.log('SleepTracker.js', results)
-        setMySleep(results.data)
-      })
-      .catch(error => console.log('Error is: ', error))
-  }, [])
-
-  function handleClick() {
-    history.push("/add-sleep");
+      .put(`/sleep/${props.id}`, props.end)
+      .then(res => console.log(res))
+      .catch(err => console.log('Error is: ', err))
   }
 
-  function viewData(sleep, index) {
-    // console.log(sleep)
-    history.push(`/sleep-tracker/${index}`)
+  function removeEntry(id) {
+    // Does not work. .del is not a function
+    // Why???
+    axiosWithAuth()
+      .del(`/sleep/${id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log('Error is: ', err))
   }
+
+  console.log('reducer', sleepData)
 
   return (
     <React.Fragment>
-      {/* <Route path='/add-sleep' component={AddSleepData} /> */}
+      {getSleepData('/sleep/')}
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -106,14 +117,9 @@ export function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" onClick={handleClick}>
+                  <Button variant="contained" color="primary" onClick={startSleep}>
                     Get Some sleep
                   </Button>
-                </Grid>
-                <Grid item>
-                  {/* <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button> */}
                 </Grid>
               </Grid>
             </div>
@@ -121,41 +127,48 @@ export function Album() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-            {mySleep.length > 0 ? <SleepHist /> : null}
-            <Grid container spacing={4}>
-              {mySleep.map((sleep, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {sleep.start ? sleep.start.split(' ')[0] : null}
-                      </Typography>
-                      <Typography>
-                        {sleep.hours ? `Total hours of sleep ${sleep.hours}` : null}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" color="primary" onClick={() => viewData(sleep, index)}>
-                        View
+          {sleepData === null ? (
+            <h1 className='no-person'>Sleep Data is loading</h1>
+          ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                {sleepData.data.length > 0 ? <SleepHist /> : null}
+                <Grid container spacing={4}>
+                  {sleepData.data.map((sleep, index) => (
+                    <Grid item key={index} xs={12} sm={6} md={4}>
+                      <Card className={classes.card}>
+                        <CardMedia
+                          className={classes.cardMedia}
+                          image="https://source.unsplash.com/random"
+                          title="Image title"
+                        />
+                        <CardContent className={classes.cardContent}>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {sleep.start ? sleep.start.split(' ')[0] : null}
+                          </Typography>
+                          <Typography>
+                            {sleep.hours ? `Total hours of sleep ${sleep.hours}` : null}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          {/* <Button size="small" color="primary" onClick={() => viewData(sleep, index)} >
+                            View
+                        </Button> */}
+                          <Button size="small" color="primary">
+                            Edit
                         </Button>
-                      <Button size="small" color="primary">
-                        Edit
-                        </Button>
-                      {sleep.end ? null : <Button size="small" color="primary">
-                        Wake Up
+                          <Button size="small" color="primary" onClick={() => removeEntry(index)}>
+                            Remove
+                          </Button>
+                          {sleep.end ? null : <Button size="small" color="primary" onClick={() => wakeUp(sleep)}>
+                            Wake Up
                         </Button>}
-                    </CardActions>
-                  </Card>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
-          </div>
+              </div>
+            )}
         </Container>
       </main>
       {/* Footer */}
@@ -166,11 +179,19 @@ export function Album() {
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Something here to give the footer a purpose!
         </Typography>
-        <Copyright />
+        {/* <Copyright /> */}
       </footer>
       {/* End footer */}
     </React.Fragment>
   );
 }
 
-export default Album
+const mapStateToProps = state => {
+  return {
+    sleepData: state.sleepData,
+    isFetching: state.isFetching,
+    error: state.error
+  };
+};
+
+export default connect(mapStateToProps, { getSleepData })(SleepTracker)
